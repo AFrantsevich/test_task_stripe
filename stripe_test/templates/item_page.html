@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="https://js.stripe.com/v3/"></script>
-    <title>Buy {{ name }}</title>
-  </head>
-  <body>
-    <h1>{{ name }}</h1>
-    <p>{{ description }}</p>
-    <p>Price: {{ price }}</p>
-    <button id="buy-button">Buy</button>
-    <script type="text/javascript" data-id="{{ id }}">
+    <head>
+        <script src="https://js.stripe.com/v3/"></script>
+        <title>Buy {{ name }}</title>
+    </head>
+    <body>
+        <h1>{{ name }}</h1>
+        <p>{{ description }}</p>
+        <p>Price: {{ price }}</p>
+        <button id="buy-button">Buy</button>
+        <script type="text/javascript" data-id="{{ id }}">
       var data = document.currentScript.dataset;
       var stripe = Stripe('pk_test_51Oo6AZG0uu3kb43DoXtaM7xxTXl8do6HM66L1UmO9NXaV0FZe66n69dtB3CVkR5wymIYMXZvNA55EDSc3isXFFXs00JMsUlM8N');
       var buyButton = document.getElementById('buy-button');
@@ -28,6 +28,6 @@
                   });
               })
       });
-    </script>
-  </body>
+        </script>
+    </body>
 </html>
