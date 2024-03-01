@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% block js %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script type="text/javascript"
+                src='{% static "js/order/change_count_items.js"%}'></script>
+        <script type="text/javascript"
+                src='{% static "js/order/strip_checkout_from_order.js"%}'></script>
+    {% endblock %}
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cart_item in cart_items %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ cart_item.item_id.name }}</td>
+                        <td>
+                            <div class="row">
+                                <div class="col input-group input-group-sm mb-3">
+                                    <button data-id="{{ cart_item.item_id.id }}"
+                                            data-order-id="{{ cart_item.id }}"
+                                            class="qty-btn-minus w-10 btn btn-outline-primary btn-sm"
+                                            type="button">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <input type="text"
+                                           name="qty"
+                                           value='{{ cart_item.quantity }}'
+                                           class="input-qty form-control">
+                                    <button data-id="{{ cart_item.item_id.id }}"
+                                            data-order-id="{{ cart_item.id }}"
+                                            class="qty-btn-plus w-10 btn btn-outline-primary btn-sm"
+                                            type="button">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <td class="cart-item-total-price" data-cart-item-id="{{ cart_item.id }}">{{ cart_item.item_total_price }}</td>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan=1">
+                    </td>
+                    <td>
+                        <a style="position: relative;
+                                  top:-3px"
+                           id="buy-button"
+                           type="button"
+                           class="w-10 btn btn-outline-primary btn-sm send-quantity ">BUY</a>
+                    </td>
+                    <td>
+                        <u><b>TOTAL</b></u>
+                    </td>
+                    <td>
+                        <u><b><span calss="align-middle" id="order-total-price">{{ cart_items.0.order_total_price }}</span></b></u>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}
