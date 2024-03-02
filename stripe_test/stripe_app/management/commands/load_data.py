@@ -22,9 +22,9 @@ class Command(BaseCommand):
         price_start(int) -- random price starts this.
         price_end(int) -- random price ends this.
         """
-        for i in range(amount_items):
+        for i in range(1, amount_items + 1):
             seeder.add_entity(Item, 1, {
-                'name': f'Item number {i}',
+                'name': f'{i} Item',
                 'description': f'This is description of Item number {i}',
                 'price': random.randint(price_start, price_end)
             })

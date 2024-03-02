@@ -65,7 +65,7 @@ def create_session(request, id=None):
     price_end(id) -- Item id if we use single item.
     """
 
-    domain_url = 'http://localhost:8000/'
+    domain_url = 'http://localhost/'
     try:
         session = stripe.checkout.Session.create(
             line_items=item_info(id),
