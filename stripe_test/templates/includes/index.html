@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src='{% static "js/index/add_items_into_order_index.js"%}'></script>
+    <script type="text/javascript"
+            src='{% static "js/index/change_count_items_index.js"%}'></script>
+{% endblock %}
+{% block content %}
+    {% load my_custom_filters %}
+    <div class="row row-cols-1 row-cols-md-4 mb-1 text-center">
+        {% for item in items %}
+            <div class="col">
+                <div class="card mb-4 rounded-4 shadow-sm">
+                    <div class="card-header py-3">
+                        <h3 class="my-0 fw-normal">{{ item.name }}</h3>
+                    </div>
+                    <div class="card-body">
+                        {% load my_custom_filters %}
+                        <h4 class="card-title pricing-card-title ">${{ item.price|divide:100 }}</h4>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>{{ item.description }}</li>
+                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col input-group input-group-sm mb-3">
+                                    <button class="qty-btn-minus w-10 btn btn-outline-primary btn-sm"
+                                            type="button">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <input type="text"
+                                           name="qty"
+                                           value='{% if not item.items.all.0.quantity %}0{% else %} {{ item.items.all.0.quantity }}{% endif %}'
+                                           class="input-qty form-control">
+                                    <button class="qty-btn-plus w-10 btn btn-outline-primary btn-sm"
+                                            type="button">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <a data-id="{{ item.id }}"
+                                   type="button"
+                                   class="w-10 btn btn-outline-primary btn-sm send-quantity">Add to order</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
