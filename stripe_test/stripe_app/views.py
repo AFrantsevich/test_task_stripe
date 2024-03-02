@@ -21,7 +21,7 @@ stripe.api_key = os.getenv('STRIPE_API_KEY',
 
 
 def index(request):
-    items = Item.objects.all()
+    items = Item.objects.all().order_by('pk')
     template = 'includes/index.html'
     context = {'items': items, }
     return render(request, template, context)
